@@ -46,9 +46,8 @@ const SignUp = () => {
     
      
     }
-    console.log(formData)
-    const {username,email,password}=formData
-    const disable=username&&email&&password
+    console.log(formData) 
+    
     
   
   return (

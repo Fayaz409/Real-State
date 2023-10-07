@@ -1,11 +1,14 @@
 import React from 'react'
 import { useState } from 'react'
 import { Link,useNavigate } from 'react-router-dom'
+import { useDispatch,useSelector } from 'react-redux'
+import {signInStart,signInFailure,signInSuccess} from '../redux/user/userSlice.js'
 
 export const SignIn = () => {
   const navigate = useNavigate()
     const [loginData,setLoginData]=useState({})
-    const [error,setError]=useState(null)
+    const {loading,error}=useSelector(state=>state.user)
+    const dispatch =useDispatch();
 
      const handleChange=(e)=>{
       
@@ -19,6 +22,7 @@ export const SignIn = () => {
      const disable=email&&password
      
      const handleSubmit=async(e)=>{
+      dispatch(signInStart())
       e.preventDefault()
       try {
         const res=await fetch('/api/auth/signin',{
@@ -32,17 +36,17 @@ export const SignIn = () => {
 
         console.log(data)
         if(data.success===false){
-          setError(true)
+          dispatch(signInFailure(data.message))
         }else{
 
-          setError(false)
+          dispatch(signInSuccess(data))
           navigate('/')
         }
          
         
         
       } catch (error) {
-        setError(error)
+        dispatch(signInFailure(error.message))
 
         
       }
