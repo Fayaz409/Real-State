@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { Link,useNavigate } from 'react-router-dom'
 import { useDispatch,useSelector } from 'react-redux'
 import {signInStart,signInFailure,signInSuccess} from '../redux/user/userSlice.js'
+import OAuth from '../components/OAuth.jsx'
 
 export const SignIn = () => {
   const navigate = useNavigate()
@@ -67,6 +68,7 @@ export const SignIn = () => {
       <input className=' focus:outline-none rounded-lg p-3  ' type="email" placeholder='email' id='email' onChange={handleChange}/>
       <input className='focus:outline-none rounded-lg p-3  ' type="password" placeholder='password' id='password' onChange={handleChange}/>
       <button  disabled={!disable} className='disabled:opacity-80 p-2 hover:opacity-90 text-white rounded bg-slate-700' >Log In</button>
+      <OAuth/>
     </form>
       <div className='flex flex-row gap-3'>
         <p>Don't Have An Account?  
